@@ -1,0 +1,54 @@
+------------
+Basics:
+------------
+
+Each lottery ticket has nine cells, each cell hiding a random number from one to nine. 
+None of the numbers should repeat.
+
+When a game starts, one of the nine cells is revealed.
+
+------------
+Generating the nine numbers
+------------
+
+We have four constraints for this problem:
+1. Numbers are unpredictable
+2. We need nine numbers
+3. Each number needs to be in the range of 1 to 9
+4. No number can appear twice.
+
+This problem can be seperated into two parts:
+1.Choosing the numbers
+2.Assigning the numbers to slots
+
+
+-----
+Choosing number
+-----
+Step 1: Create a variable, recentNumber and set to 1.
+Step 2: Output recentNumber
+Step 3: Increment recentNumber
+
+------
+Assign numbers to slots
+------
+Step 1: For each spot in the multidimensional array, "cells", or "cells[][3]":
+	Fill spot with temporary number, "-1"
+Step 2: While recently used number < 9:
+	1. Choose new number.
+	2. Randomly choose a spot from "cells"
+	3. While "spot" does not contain temporary number, "-1", randomly select a new spot.
+	4. Assign new number to spot.
+
+------------
+Choosing cell to reveal
+------------
+Only one cell needs to be revealed, and it can be any cell, so this solution should be simple
+
+-----
+Reveal number
+-----
+Step 1: Create parallel boolean array to  multidimensional array, "cells", "revealed"
+Step 2: Set all values in "revealed" to false
+Step 2: Select a spot from "cells"
+Step 3: In the corresponding spot in "revealed", set the value to true.

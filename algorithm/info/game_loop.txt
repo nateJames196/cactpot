@@ -1,0 +1,80 @@
+------------
+Basics:
+------------
+When the user chooses to play a game, a new ticket will be randomly 
+generated and the user will then select three numbers, select a 
+line, and receive a reward.
+
+------------
+Setting up the game
+------------
+First, the game randomly generates a new ticket. 
+
+The output should include:
+	-a two-dimensional array representing the ticket
+		-Every integer 1 - 9 should appear in the array once, 
+		and only once.
+		-The array should be 3x3
+	-a parallel array representing the revealed cells
+		-Exactly one spot in the array should be "revealed"
+		-All other spots in the array should be "not revealed"
+
+------------
+Begin the game
+------------
+To begin, the player selects three cells from the eight hidden 
+values on the ticket, and uncovers their numbers. Each cell 
+should be given a number from 1 to 9.
+
+Result:
+The player should select three hidden cells from the ticket, 
+and at the end of the phase, four values on the ticket should
+be revealed.
+
+This problem has three parts:
+1. Clearly numbering each cell from 1 to 9
+2. Selecting the three cells
+3. Uncovering the numbers
+
+------------
+Select a line
+------------
+Next, the player selects one of eight lines ─ vertical, horizontal, 
+or diagonal. Each "line" represents a set of three numbers, and 
+it should be clearly numbered from 1 to 8.
+
+Once the player has selected a line, all its numbers are uncovered 
+and the player is awarded Gold Point Rewards based on the sum of the 
+line chosen, using the Payout table.
+
+Result:
+The player should select one of eight lines, and once a line is 
+selected, they should be awarded points based on the point 
+table.
+
+This problem has two parts:
+1. Clearly numbering each "line" of numbers from 1 to 8
+2. Selecting a single line
+3. Uncover all numbers on the line
+4. Award point reward based on the sum of the numbers in the line
+
+------------
+End the game
+------------
+At the end of each game, the system will read in the score stored in 
+“highscore.txt”.
+
+Result:
+If the current player's high score is greater than the existing 
+high score, the highscore.txt file should be regenerated with 
+the current player's high score
+
+This problem has four parts:
+1. Try to open highscore.txt for reading
+2. If necessary, create highscore.txt with current player's 
+name & score
+3. Otherwise, see if the current user scored equal or higher than 
+the player in the file
+4. If the current user scored higher, replace highscore.txt with 
+a new version of highscore.txt containing the current player's 
+name and score.

@@ -1,0 +1,39 @@
+------------
+Basics:
+------------
+The main menu, which is what the user will encounter as soon as they open the game, 
+will need to include the following options.
+
+1) See Rules 
+2) Play Game 
+3) See Highest Score 
+4) Quit
+
+------------
+Operating main menu:
+------------
+We have three constraints for the menu:
+1. The user needs to be able to try again if there is an invalid menu option
+2. We want the user to be able to play again after finishing a game
+3. The user needs to be able to select all four options
+
+This means that the main menu will need to be displayed using a while loop, which 
+pauses whenever it wants input from the user.
+
+This problem has two parts:
+Building and rebuilding the menu
+Handling user input
+
+-----
+Algorithm
+-----
+Step 1: Print the menu to the console
+Step 2: Collect input from the user, store to "userOP"
+Step 3: Check to see which option from the menu the user picked
+Step 4: Perform action selected from the menu
+	if 1, display Rules
+	if 2, begin a game of cactus pot
+	if 3, display the highest score
+	if 4, quit
+	if any other number, display error
+Step 4: If the user did not choose "quit", repeat from step 1

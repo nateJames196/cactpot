@@ -1,0 +1,65 @@
+Cactus Pot (Cactpot) is a lottery game where the player wins Gold Point Rewards.  
+ 
+How to Play 
+ 
+Every lottery ticket has nine cells – a 3x3 matrix, and eight lines – vertical, 
+horizontal, and diagonal. Each cell hides a random number from one to nine – no 
+repeats. When a game starts, eight of these nine numbers are hidden.
+
+1. Select Three Numbers 
+ 
+To begin, the player selects three cells from the eight with hidden values on 
+the ticket, and uncover their numbers.
+
+2. Select a Line 
+ 
+Next, the player selects one of eight lines ─ vertical, horizontal, or diagonal.
+
+3. Receive a Reward 
+ 
+Once the player has selected a line, all its numbers are uncovered and the player 
+is awarded Gold Point Rewards based on the sum of the line chosen, using the 
+Payout table shown below. 
+
+Goal: 
+ 
+The goal of the project is to implement a text-based/menu-driven Cactpot lottery game.   
+ 
+The game will include the following: 
+ 
+-A main menu from which the user will choose: 
+ 
+1) See Rules 
+2) Play Game 
+3) See Highest Score 
+4) Quit 
+ 
+- When the user chooses to play a game, a new ticket will be randomly generated and 
+the user will then select three numbers, select a line, and receive a reward. 
+ 
+- At the end of each game, the system will read in the score stored in “highscore.txt”. 
+	- If the file does not exist, it will create one with the current player as the high 
+	score (name & score).
+	- If the user has scored equal or higher than the value in the file, it will replace 
+	the text file with the current player’s name and score.
+	- Otherwise, the text file will remain intact.
+ 
+-The user should be able to play as many times as he/she wishes.
+
+Notes about Functionality, Implementation & Program Requirements: 
+1. The program should validate the information entered by the user and display the 
+appropriate error messages. 
+2. The code should be self-documented, including:
+	- Descriptive Comment indicating 
+	- Author 
+	- Program Summary 
+	- IPO Chart 
+	- Appropriate comments throughout the code that highlight, among other things, 
+	the implementation of the algorithm. 
+	- Adequate use of spaces and indentation so the source code is easy to read when 
+	printed out. 
+3. Functional decomposition implementation of the algorithm. Must define at least four 
+different functions. Make sure to include functions that exemplify void vs. return-type, 
+and value vs. reference parameters. 
+ 
+Have fun and be creative!!  
