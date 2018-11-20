@@ -8,7 +8,8 @@ line, and receive a reward.
 ------------
 Setting up the game
 ------------
-First, the game randomly generates a new ticket. 
+First, the game randomly generates a new ticket. Then, the game displays 
+the newly created ticket to the screen
 
 The output should include:
 	-a two-dimensional array representing the ticket
@@ -18,6 +19,7 @@ The output should include:
 	-a parallel array representing the revealed cells
 		-Exactly one spot in the array should be "revealed"
 		-All other spots in the array should be "not revealed"
+	-Console representation of the ticket
 
 ------------
 Begin the game
