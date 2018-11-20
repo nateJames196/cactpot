@@ -8,8 +8,7 @@ line, and receive a reward.
 ------------
 Setting up the game
 ------------
-First, the game randomly generates a new ticket. Then, the game displays 
-the newly created ticket to the screen
+First, the game randomly generates a new ticket.
 
 The output should include:
 	-a two-dimensional array representing the ticket
@@ -19,24 +18,29 @@ The output should include:
 	-a parallel array representing the revealed cells
 		-Exactly one spot in the array should be "revealed"
 		-All other spots in the array should be "not revealed"
-	-Console representation of the ticket
 
 ------------
 Begin the game
 ------------
-To begin, the player selects three cells from the eight hidden 
-values on the ticket, and uncovers their numbers. Each cell 
-should be given a number from 1 to 9.
+To begin, the ticket is displayed to the screen. Then, instructional text is 
+printed to the screen, and the player enters three strings in the range A1 - C3. 
+If the player enters a string that is outside that range, for example, "A0", "D1", 
+or "B4", then it is rejected and the player is asked to enter that value again.
 
-Result:
-The player should select three hidden cells from the ticket, 
-and at the end of the phase, four values on the ticket should
-be revealed.
+Consider this the algorithm for the "beginGame" function.
 
-This problem has three parts:
-1. Clearly numbering each cell from 1 to 9
-2. Selecting the three cells
-3. Uncovering the numbers
+Step 1: Display ticket
+Step 2: Print "Please enter the row# and col3 of the cell you want to reveal"
+Step 3:
+	Until 3 new values have been revealed:
+		1.Prompt user for new value.
+		2. Check the entered value to see if matches any of the following strings:
+			"A1, A2, A3, B1, B2, B3, C1, C2, C3"
+			If it doesn't match, reject the value and tell the player to try again
+		3. Check to see if the entered value is already revealed.
+			if it is already revealed, reject the value and tells the player to try again
+		4. Change the corresponding value in the revealed array to "true"
+		5. Print the ticket again
 
 ------------
 Select a line
@@ -49,16 +53,54 @@ Once the player has selected a line, all its numbers are uncovered
 and the player is awarded Gold Point Rewards based on the sum of the 
 line chosen, using the Payout table.
 
-Result:
-The player should select one of eight lines, and once a line is 
-selected, they should be awarded points based on the point 
-table.
+Consider this the algorithm for the "selectLine" function
 
-This problem has two parts:
-1. Clearly numbering each "line" of numbers from 1 to 8
-2. Selecting a single line
-3. Uncover all numbers on the line
-4. Award point reward based on the sum of the numbers in the line
+Step 1:
+	Display ticket
+Step 2:
+	1. Print: "Please select from one of the following lines, (1-8):"
+	2. Print "Line 1: Row 1 /nLine 2: Row 2/nLine 3: Row 3"
+	3. Print "Line 4: A1, B2, C3/n"
+	4. Print "Line 5: Col A /nLine 6: Col B/nLine 7: Col C"
+	5. Print "Line 8: "A3, B2, C3"
+Step 3: 
+	Prompt the player to select a line.
+Step 4:
+	If the player entered anything that was not an integer between 1 and 8, repeat from step 3 until they enter something valid
+Step 5:
+	reveal each cell in the line, based on the integer entered
+------
+Reveal a line
+------
+Based on an integer, "line":
+If line == 1, 2, or 3:
+	For each col in ticket array:
+		change spot [line - 1][col] in revealed array to true
+If line == 4:
+	change spots [0][0], [1][1], and [2][2] in revealed array to true
+if line == 5, 6, 7:
+	For each row in ticket array:
+		change spot [row][line - 5] in revealed array to true
+if line == 8:
+	change spots [0][2], [1][1], and [2][0] in revealed array to true
+
+------
+Award gold points
+------
+Based on an integer, "line", and assuming a variable "total"
+
+If line == 1, 2, or 3:
+	For each col in ticket array:
+		add value in spot [line - 1][col] in ticket array to total
+If line == 4:
+	add values in spots [0][0], [1][1], and [2][2] in ticket array to total
+if line == 5, 6, 7:
+	For each row in ticket array:
+		add value in spot [row][line - 5] in ticket array to total
+if line == 8:
+	add values in spots [0][2], [1][1], and [2][0] in ticket array to total
+
+Based on the value of "total", refer to payout table and award gold points.(TODO)
 
 ------------
 End the game
@@ -66,17 +108,16 @@ End the game
 At the end of each game, the system will read in the score stored in 
 “highscore.txt”.
 
-Result:
-If the current player's high score is greater than the existing 
-high score, the highscore.txt file should be regenerated with 
-the current player's high score
-
-This problem has four parts:
-1. Try to open highscore.txt for reading
-2. If necessary, create highscore.txt with current player's 
-name & score
-3. Otherwise, see if the current user scored equal or higher than 
-the player in the file
-4. If the current user scored higher, replace highscore.txt with 
-a new version of highscore.txt containing the current player's 
-name and score.
+Step 1: Try to open highscore.txt for reading
+Step 2:	if a line can be read from highscore.txt(use getline):
+		read another line from highscore.txt into a variable, "oldScore"
+Step 3: close highscore.txt
+Step 3: if newScore > oldScore:
+	1. open highscore.txt for writing
+	2. Prompt player to enter their name(use getline):
+	3. print the name to the file
+	4. Print the score to the file
+	5. Close highscore.txt
+	6. Print: "New High score: <score>", where "<score>" is "newScore"
+Step 4: Print: "/n/nGame Over./n/n";
+Step 5: Pause the system.
