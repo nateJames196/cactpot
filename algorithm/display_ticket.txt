@@ -1,0 +1,22 @@
+------------
+Display ticket to screen
+------------
+This is the algorithm for a function that displays the ticket to the screen
+
+Step 1:
+	Create char array, "tempSpots" with the characters in "Cactuspot"
+Step 2:
+	1. Print "Col#: A | B | C" to screen
+	2. Skip a line
+	3. Print "Row#:" to screen
+	4. Skip a line
+Step 3:
+	1. For each row in the ticket two-dimensional array, "row":
+		a. print the value of "row", and then a space
+		b. For each column in the ticket two-dimensional array, "col":
+			If the corresponding spot in revealed array, "revealed[row][col]" is revealed:
+				display the value to the screen
+			Else:
+				display the corresponding spot in tempSpots, "tempSpots[row][col]"
+			print the character "|"
+		c. Skip a line
