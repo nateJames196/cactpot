@@ -1,0 +1,12 @@
+------------
+See highest score
+------------
+In the main menu, there should be an option to show the highest score. Consider this the algorithm.
+
+Step 1: Open "highscore.txt" for reading
+Step 2: Check to see if highscore.txt has any content
+	-if it has no content:
+		1. display a message saying there is no high score
+		2. Skip step 3 and 4
+Step 3: Read name and score from highscore.txt into variables
+Step 4: Display name and score to the screen
