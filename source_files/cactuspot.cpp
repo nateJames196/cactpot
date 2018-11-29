@@ -16,6 +16,8 @@ void displayTicket(int[][3], bool[][3]);
 void endGame(int);
 bool manageHighScore(int);
 
+
+
 int main() {
 	int ticket[3][3], revealed[3][3];
 	const minOP = 1;
@@ -123,14 +125,74 @@ void playGame(ticket[][3], revealed[][3]) {
 	endGame(Score);
 }
 
+void prepTicket(int ticket[][3], bool revealed[][3]) {
+	for (int i = 0;i < 3;i++) {
+		for (int k = 0;k < 3;k++) {
+			ticket[i][k] = -1;
+		}
+	}
+	
+	for (int i = 0;i < 3;i++) {
+		for (int k = 0;k < 3;k++) {
+			revealed[i][k] = false;
+		}
+	}
+}
+
 //Generates a new cactus pot ticket
-void generateTicket(ticket[][3], revealed[][3]) {
-	//TODO
+void generateTicket(int ticket[][3], bool revealed[][3]) {
+	//random number generator variables
+	int random, altrandom;
+	
+	//
+	int recentNumbers[9], slottedCount = 0, oldSlotted;
+	
+	//Get the ticket ready for generation
+	prepTicket(ticket, revealed);
+	srand(time(NULL));
+	
+	//Randomly generate the numbers on the ticket
+	for (int i = 0;i < 3;i++) {
+		for (int k = 0;k < 3;k++) {
+			if (ticket[i][k] == 1) {
+				do {
+					oldSlotted = slottedCount
+					random = rand() % 10;
+					
+					//Check to see if random has been used before
+					for (int j = 0;j < slottedCount;j++) {
+						if (random == recentNumbers[j]) {
+							j = 10;
+						}
+					}
+				
+					//Normally the loop ends at 9, so a 10 should only occur if it got matched
+					if (j != 10) {
+						tickets[i][k] = random;
+						recentNumbers[slottedCount] = random;
+						slottedCount++;
+					}
+				} while (oldSlotted == slottedCount);//until the number in "slottedCount" changes
+			}
+		}
+	}
+	
+	//Randomly pick the spot in we want to reveal
+	random = rand() % 3;
+	altrandom = rand() % 3;
+	revealed[random][altrandom] = true;
 }
 
 //Displays the game ticket to the console
 void displayTicket(ticket[][3], revealed[][3]) {
 	//TODO
+}
+
+
+void displayHighScore();
+
+void displayHighScore() {
+	//Some code
 }
 
 
@@ -143,8 +205,6 @@ void endGame(int score) {
 	cout << "Game 0ver.";
 	system("pause");
 }
-
-
 
 //Determines if the player got a highscore, and replaces the old one if needed
 bool manageHighScore(int newScore) {
