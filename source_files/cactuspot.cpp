@@ -6,10 +6,15 @@
 	Game summary
 */
 
-void printInstructions();
-void playGame();
 void displayScore();
 int awardPoints(int);
+int getScore(int lineChoice);
+void printInstructions();
+void playGame(int[][3], bool[][3]);
+void generateTicket(int[][3], bool[][3]);
+void displayTicket(int[][3], bool[][3]);
+void endGame(int);
+bool manageHighScore(int);
 
 int main() {
 	int ticket[3][3], revealed[3][3];
@@ -29,7 +34,7 @@ int main() {
 				printInstruction();
 				break;
 			case 2:
-				playGame();
+				playGame(ticket, revealed);
 				break;
 			case 3:
 				displayScore();
@@ -45,6 +50,12 @@ int main() {
 	
 	system("pause");
 	return 0;
+}
+
+void displayScore() {
+	
+	//TODO
+	
 }
 
 /*
@@ -68,6 +79,14 @@ int awardPoints(int sum) {
 
 }
 
+int getScore(int lineChoice) {
+	int sum;
+	
+	//TODO: determine the sum, given line choice
+	
+	awardPoints;
+}
+
 void printInstructions() {
 	cout << "\tRules...\n" endl;
 	cout << "Every lottery ticket has nine cells – a 3x3 matrix, "
@@ -83,4 +102,51 @@ void printInstructions() {
 	<< "numbers are uncovered and you are awarded Gold Point Rewards." << endl;
 	cout << "You are able to play as many times as you wish.\n" 
 	<< "Have Fun!" << endl;
+}
+
+void playGame(ticket[][3], revealed[][3]) {
+	int lnChoice, score;
+	//Generate the ticket and then randomly pick a spot to reveal
+	generateTicket(ticket, revealed);
+	
+	//Prompt the user to pick three cells to reveal
+	gameBegin();
+	
+	//Prompt the user to pick one of eight sets of cells, reveal the cells, then return the line number
+	lnChoice = lineSelect();
+	
+	//Based on the line number, get a sum of all numbers in the line, feed it to the awardPoints function, 
+	//then return the points awarded
+	score = getScore(lnChoice);
+	
+	//Based on the user's points, handle a new high score if necessary, then end the game.
+	endGame(Score);
+}
+
+//Generates a new cactus pot ticket
+void generateTicket(ticket[][3], revealed[][3]) {
+	//TODO
+}
+
+//Displays the game ticket to the console
+void displayTicket(ticket[][3], revealed[][3]) {
+	//TODO
+}
+
+
+
+void endGame(int score) {
+	if (manageHighScore(score)) {
+		cout << "Congratulations you got the new high score!";
+	}
+	
+	cout << "Game 0ver.";
+	system("pause");
+}
+
+
+
+//Determines if the player got a highscore, and replaces the old one if needed
+bool manageHighScore(int newScore) {
+	//TODO
 }
