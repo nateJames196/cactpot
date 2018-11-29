@@ -3,9 +3,12 @@
 	
 	cactuspot.cpp
 	
-	Game summary
+	Console based app that allows the player to play the lottery 
+	game "Cactus pot"
 */
 
+
+//Function declarations
 void displayScore();
 int awardPoints(int);
 int getScore(int lineChoice);
@@ -16,24 +19,28 @@ void displayTicket(int[][3], bool[][3]);
 void endGame(int);
 bool manageHighScore(int);
 
-const char tempSlots[][] = {
+//Used to fill in the unrevealed slots on the ticket
+const char TEMP_SLOTS[][] = {
 	{'C', 'A', 'C'}, 
 	{'T', 'U', 'S'},
 	{'P', 'O', 'T'}
 };
 
 int main() {
-	int ticket[3][3], revealed[3][3];
+	//Menu management variables
 	const minOP = 1;
 	const maxOP =4;
 	int userOP;
+	
+	//Ticket management variables
+	int ticket[3][3], revealed[3][3];
 	do {
 		cout << "\t\tCactpot Main Menu\n"" << endl;
 		cout<< "1) See Rules" << endl;
 		cout << "2) Play Game" << endl;
 		cout << "3)See Highest Score" << endl;
 		cout << "4)Quit" << endl;
-		cin >> userOP
+		cin >> userOP;
 		
 		switch(userOP) {
 			case 1:
@@ -93,6 +100,11 @@ int getScore(int lineChoice) {
 	awardPoints;
 }
 
+/*
+	void printInstructions()
+	
+	Prints out the game's instructions to the screen
+*/
 void printInstructions() {
 	cout << "\tRules...\n" endl;
 	cout << "Every lottery ticket has nine cells – a 3x3 matrix, "
@@ -110,13 +122,18 @@ void printInstructions() {
 	<< "Have Fun!" << endl;
 }
 
-void playGame(ticket[][3], revealed[][3]) {
+/*
+	void playGame(int ticket[][3], bool revealed[][3])
+	
+	Guides the player through each stage of the game
+*/
+void playGame(int ticket[][3], bool revealed[][3]) {
 	int lnChoice, score;
 	//Generate the ticket and then randomly pick a spot to reveal
 	generateTicket(ticket, revealed);
 	
 	//Prompt the user to pick three cells to reveal
-	gameBegin();
+	beginGame();
 	
 	//Prompt the user to pick one of eight sets of cells, reveal the cells, then return the line number
 	lnChoice = lineSelect();
@@ -129,6 +146,11 @@ void playGame(ticket[][3], revealed[][3]) {
 	endGame(Score);
 }
 
+/*
+	void prepTicket(int ticket[][3], bool revealed[][3])
+	
+	Prepares a newly declared ticket for generation
+*/
 void prepTicket(int ticket[][3], bool revealed[][3]) {
 	for (int i = 0;i < 3;i++) {
 		for (int k = 0;k < 3;k++) {
@@ -187,8 +209,12 @@ void generateTicket(int ticket[][3], bool revealed[][3]) {
 	revealed[random][altrandom] = true;
 }
 
-//Displays the game ticket to the console
-void displayTicket(ticket[][3], revealed[][3]) {
+/*
+	void displayTicket(int ticket[][3], bool revealed[][3])
+	
+	Displays an existing ticket to the screen with column and row numbers
+*/
+void displayTicket(int ticket[][3], bool revealed[][3]) {
 	cout << "Col#: | A | B | C " << endl;
 	cout << "Row#:  ___ ___ ___" << endl;
 	for (int i = 0;i < 3;i++) {
@@ -197,26 +223,24 @@ void displayTicket(ticket[][3], revealed[][3]) {
 			if (revealed[i][k])
 				cout << ticket[i][k];
 			else 
-				cout << tempSlots[i][k];
+				cout << TEMP_SLOTS[i][k];
 		}
 		cout << endl << setw(7) << "___ ___ ___" << endl;
 	}
-} 
-
-void displayHighScore();
-
-void displayHighScore() {
-	//Some code
 }
 
-
-
+/*
+	void endGame(int score)
+	
+	Checks to see if the user has a high score, and displays a short congratulatory 
+	message if they do. Ends the ongoing game with a "Game Over" message
+*/
 void endGame(int score) {
 	if (manageHighScore(score)) {
 		cout << "Congratulations you got the new high score!";
 	}
 	
-	cout << "Game 0ver.";
+	cout << "Game Over.";
 	system("pause");
 }
 
