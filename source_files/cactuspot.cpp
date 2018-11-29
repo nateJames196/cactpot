@@ -17,6 +17,7 @@ void playGame(int[][3], bool[][3]);
 void generateTicket(int[][3], bool[][3]);
 void displayTicket(int[][3], bool[][3]);
 void endGame(int);
+void beginGame(int[][3], bool[][3]);
 bool manageHighScore(int);
 
 //Used to fill in the unrevealed slots on the ticket
@@ -66,9 +67,7 @@ int main() {
 }
 
 void displayScore() {
-	
 	//TODO
-	
 }
 
 /*
@@ -97,7 +96,7 @@ int getScore(int lineChoice) {
 	
 	//TODO: determine the sum, given line choice
 	
-	awardPoints;
+	awardPoints(sum);
 }
 
 /*
@@ -133,7 +132,7 @@ void playGame(int ticket[][3], bool revealed[][3]) {
 	generateTicket(ticket, revealed);
 	
 	//Prompt the user to pick three cells to reveal
-	beginGame();
+	beginGame(ticket, revealed);
 	
 	//Prompt the user to pick one of eight sets of cells, reveal the cells, then return the line number
 	lnChoice = lineSelect();
@@ -146,23 +145,8 @@ void playGame(int ticket[][3], bool revealed[][3]) {
 	endGame(Score);
 }
 
-/*
-	void prepTicket(int ticket[][3], bool revealed[][3])
-	
-	Prepares a newly declared ticket for generation
-*/
-void prepTicket(int ticket[][3], bool revealed[][3]) {
-	for (int i = 0;i < 3;i++) {
-		for (int k = 0;k < 3;k++) {
-			ticket[i][k] = -1;
-		}
-	}
-	
-	for (int i = 0;i < 3;i++) {
-		for (int k = 0;k < 3;k++) {
-			revealed[i][k] = false;
-		}
-	}
+void beginGame(int ticket[][3], bool revealed[][3]) {
+	//TODO
 }
 
 //Generates a new cactus pot ticket
@@ -207,6 +191,25 @@ void generateTicket(int ticket[][3], bool revealed[][3]) {
 	random = rand() % 3;
 	altrandom = rand() % 3;
 	revealed[random][altrandom] = true;
+}
+
+/*
+	void prepTicket(int ticket[][3], bool revealed[][3])
+	
+	Prepares a newly declared ticket for generation
+*/
+void prepTicket(int ticket[][3], bool revealed[][3]) {
+	for (int i = 0;i < 3;i++) {
+		for (int k = 0;k < 3;k++) {
+			ticket[i][k] = -1;
+		}
+	}
+	
+	for (int i = 0;i < 3;i++) {
+		for (int k = 0;k < 3;k++) {
+			revealed[i][k] = false;
+		}
+	}
 }
 
 /*
