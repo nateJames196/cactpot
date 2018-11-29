@@ -16,7 +16,11 @@ void displayTicket(int[][3], bool[][3]);
 void endGame(int);
 bool manageHighScore(int);
 
-
+const char tempSlots[][] = {
+	{'C', 'A', 'C'}, 
+	{'T', 'U', 'S'},
+	{'P', 'O', 'T'}
+};
 
 int main() {
 	int ticket[3][3], revealed[3][3];
@@ -185,9 +189,19 @@ void generateTicket(int ticket[][3], bool revealed[][3]) {
 
 //Displays the game ticket to the console
 void displayTicket(ticket[][3], revealed[][3]) {
-	//TODO
-}
-
+	cout << "Col#: | A | B | C " << endl;
+	cout << "Row#:  ___ ___ ___" << endl;
+	for (int i = 0;i < 3;i++) {
+		cout << setw(5) << i + 1 << "|";
+		for (int k = 0;k < 3;k++) {
+			if (revealed[i][k])
+				cout << ticket[i][k];
+			else 
+				cout << tempSlots[i][k];
+		}
+		cout << endl << setw(7) << "___ ___ ___" << endl;
+	}
+} 
 
 void displayHighScore();
 
