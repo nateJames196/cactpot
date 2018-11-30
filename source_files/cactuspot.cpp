@@ -50,8 +50,8 @@ int main() {
 		cout << "\t\tCactpot Main Menu\n" << endl;
 		cout << "1) See Rules" << endl;
 		cout << "2) Play Game" << endl;
-		cout << "3)See Highest Score" << endl;
-		cout << "4)Quit" << endl;
+		cout << "3) See Highest Score" << endl;
+		cout << "4) Quit" << endl;
 		cin >> userOP;
 
 		switch (userOP) {
@@ -90,7 +90,7 @@ void displayScore() {
 		cout << "Current Highscore: " << score << ", by " << userName << endl;
 	}
 	else {
-		cout << "There Is No Highscore....." << endl;
+		cout << endl << "There Is No Highscore....." << endl << endl;
 	}
 	infile.close();
 }
@@ -217,9 +217,9 @@ int lineSelect(int ticket[][3], bool revealed[][3]) {
 	//Prompt the user for their choice of line
 	do {
 		cout << "Please select from one of the following lines, (1-8):"
-			<< "Line 1: Row 1 /nLine 2: Row 2/nLine 3: Row 3"
-			<< "Line 4: A1, B2, C3/n"
-			<< "Line 5: Col A /nLine 6: Col B/nLine 7: Col C"
+			<< "Line 1: Row 1 \nLine 2: Row 2\nLine 3: Row 3"
+			<< "Line 4: A1, B2, C3\n"
+			<< "Line 5: Col A \nLine 6: Col B\nLine 7: Col C"
 			<< "Line 8: A3, B2, C3";
 		cin >> choice;
 		if (choice > 8 || choice < 1) {
@@ -353,7 +353,7 @@ void prepTicket(int ticket[][3], bool revealed[][3]) {
 */
 void displayTicket(int ticket[][3], bool revealed[][3]) {
 	cout << "Col#: | A | B | C " << endl;
-	cout << "Row#:  ___ ___ ___" << endl;
+	cout << "Row#: " << endl;
 	for (int i = 0; i < 3; i++) {
 		cout << setw(5) << i + 1 << "|";
 		for (int k = 0; k < 3; k++) {
@@ -361,8 +361,9 @@ void displayTicket(int ticket[][3], bool revealed[][3]) {
 				cout << ticket[i][k];
 			else
 				cout << TEMP_SLOTS[i][k];
+			cout << "|";
 		}
-		cout << endl << setw(7) << "___ ___ ___" << endl;
+		cout << endl;
 	}
 }
 
