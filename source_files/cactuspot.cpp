@@ -18,7 +18,7 @@ void generateTicket(int[][3], bool[][3]);
 void displayTicket(int[][3], bool[][3]);
 void endGame(int);
 void beginGame(int[][3], bool[][3]);
-bool manageHighScore(int);
+bool manageHighScore(int, string&);
 
 //Used to fill in the unrevealed slots on the ticket
 const char TEMP_SLOTS[][] = {
@@ -67,7 +67,20 @@ int main() {
 }
 
 void displayScore() {
-	//TODO
+	int score;
+	string userName;
+	ifstream infile;  //file open 
+	infile.open("highscore.txt");
+
+	if (getline(infile, userName)) {
+		infile.ignore();
+		infile >> score;
+		
+		cout << "Current Highscore: " << score << ", by " << userName << endl;
+	} else {
+		 cout << "There Is No Highscore....." << endl;
+	}
+	infile.close();
 }
 
 /*
@@ -239,8 +252,9 @@ void displayTicket(int ticket[][3], bool revealed[][3]) {
 	message if they do. Ends the ongoing game with a "Game Over" message
 */
 void endGame(int score) {
-	if (manageHighScore(score)) {
-		cout << "Congratulations you got the new high score!";
+	string name;
+	if (manageHighScore(score, name)) {
+		cout << "Congratulations, " << name << "!";
 	}
 	
 	cout << "Game Over.";
@@ -248,6 +262,30 @@ void endGame(int score) {
 }
 
 //Determines if the player got a highscore, and replaces the old one if needed
-bool manageHighScore(int newScore) {
-	//TODO
+bool manageHighScore(int newScore, string name&) {
+	int oldScore = -1;
+	string name;
+	ifstream infile;
+	ofstream outfile;
+	infile.open("highscore.txt");
+
+	//Check if we can read from the file
+	if (getline(infile, name)) {
+		//If we can, grab the score too
+		infile.ignore();
+		infile >> oldScore;
+	}
+	infile.close();
+	
+	//if the file had nothing in it, oldScore will be -1, which is always less than "newScore"
+	if (oldScore < newScore) {
+		cout << "You got a new high score! Please enter your name: ";
+		getline(cin, name);
+		
+		outfile.open("highscore.txt", ios::out);
+		outfile << name << endl << newScore;
+		return true;
+	} else {
+		return false;
+	}
 }
