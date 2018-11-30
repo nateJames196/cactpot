@@ -195,7 +195,7 @@ void beginGame(int ticket[][3], bool revealed[][3]) {
 							displayTicket(ticket, revealed);
 						}
 						else {//if it is revealed, 
-							cout << "Error ... That cell is already revealed. Please choose a different one.";
+							cout << "Error ... That cell is already revealed. Please choose a different one." << endl;
 							donetracker = 0;
 						}
 						break;
@@ -205,7 +205,7 @@ void beginGame(int ticket[][3], bool revealed[][3]) {
 
 			//Don't display another error if we already showed one.
 			if (donetracker == -1) {
-				cout << "Error ... Invalid cell. Please try again.";
+				cout << "Error ... Invalid cell. Please try again." << endl;
 			}
 		} while (donetracker != 1);
 	}
@@ -217,9 +217,9 @@ int lineSelect(int ticket[][3], bool revealed[][3]) {
 	//Prompt the user for their choice of line
 	do {
 		cout << "Please select from one of the following lines, (1-8):"
-			<< "Line 1: Row 1 \nLine 2: Row 2\nLine 3: Row 3"
+			<< "Line 1: Row 1 \nLine 2: Row 2\nLine 3: Row 3\n"
 			<< "Line 4: A1, B2, C3\n"
-			<< "Line 5: Col A \nLine 6: Col B\nLine 7: Col C"
+			<< "Line 5: Col A \nLine 6: Col B\nLine 7: Col C\n"
 			<< "Line 8: A3, B2, C3";
 		cin >> choice;
 		if (choice > 8 || choice < 1) {
@@ -287,7 +287,6 @@ void generateTicket(int ticket[][3], bool revealed[][3]) {
 	//random number generator variables
 	int random, altrandom;
 
-	//
 	int recentNumbers[9], slottedCount = 0, oldSlotted;
 
 	//Get the ticket ready for generation
@@ -295,31 +294,32 @@ void generateTicket(int ticket[][3], bool revealed[][3]) {
 	srand(time(NULL));
 
 	//Randomly generate the numbers on the ticket
+	cout << endl << endl << "Generating ticket";
 	for (int i = 0; i < 3; i++) {
 		for (int k = 0; k < 3; k++) {
-			if (ticket[i][k] == 1) {
-				do {
-					oldSlotted = slottedCount;
-						random = rand() % 10;
+			cout << '.';
+			do {
+				oldSlotted = slottedCount;
+				random = rand() % 10;
 
-					//Check to see if random has been used before
-					int j;
-					for (j = 0; j < slottedCount; j++) {
-						if (random == recentNumbers[j]) {
-							j = 10;
-						}
+				//Check to see if random has been used before
+				int j;
+				for (j = 0; j < slottedCount; j++) {
+					if (random == recentNumbers[j]) {
+						j = 99;
 					}
+				}
 
-					//Normally the loop ends at 9, so a 10 should only occur if it got matched
-					if (j != 10) {
-						ticket[i][k] = random;
-						recentNumbers[slottedCount] = random;
-						slottedCount++;
-					}
-				} while (oldSlotted == slottedCount);//until the number in "slottedCount" changes
-			}
+				//Normally the loop ends at 9, so a 10 should only occur if it got matched
+				if (j < 9) {
+					ticket[i][k] = random;
+					recentNumbers[slottedCount] = random;
+					slottedCount++;
+				}
+			} while (oldSlotted == slottedCount);//until the number in "slottedCount" changes
 		}
 	}
+	cout << "Done!" << endl << endl;
 
 	//Randomly pick the spot in we want to reveal
 	random = rand() % 3;
@@ -352,10 +352,11 @@ void prepTicket(int ticket[][3], bool revealed[][3]) {
 	Displays an existing ticket to the screen with column and row numbers
 */
 void displayTicket(int ticket[][3], bool revealed[][3]) {
-	cout << "Col#: | A | B | C " << endl;
+	cout << "Your Ticket: " << endl;
+	cout << "Col#:  A|B|C" << endl;
 	cout << "Row#: " << endl;
 	for (int i = 0; i < 3; i++) {
-		cout << setw(5) << i + 1 << "|";
+		cout << setw(6) << i + 1 << "|";
 		for (int k = 0; k < 3; k++) {
 			if (revealed[i][k])
 				cout << ticket[i][k];
