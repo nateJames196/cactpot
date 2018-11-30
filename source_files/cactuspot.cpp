@@ -263,20 +263,24 @@ int getScore(int lineChoice, int ticket[][3]) {
 		sum += ticket[lineChoice - 1][0];
 		sum += ticket[lineChoice - 1][1];
 		sum += ticket[lineChoice - 1][2];
+		break;
 	case 4:
 		sum += ticket[0][0];
 		sum += ticket[1][1];
 		sum += ticket[2][2];
+		break;
 	case 5:
 	case 6:
 	case 7:
 		sum += ticket[0][lineChoice - 5];
 		sum += ticket[1][lineChoice - 5];
 		sum += ticket[2][lineChoice - 5];
+		break;
 	default:
 		sum += ticket[0][2];
 		sum += ticket[1][1];
 		sum += ticket[2][0];
+		break;
 	}
 
 	cout << "Line sum: " << sum << endl;
@@ -381,7 +385,7 @@ void endGame(int score) {
 	cout << "Final Score: " << score << endl 
 		<< "-----------------------------------------" << endl << endl;
 	if (manageHighScore(score, name)) {
-		cout << "Congratulations, " << name << "!";
+		cout << "Congratulations, " << name << "!" << endl << endl;
 	}
 
 	cout << "Game Over." << endl;
@@ -406,7 +410,7 @@ bool manageHighScore(int newScore, string& name) {
 	//if the file had nothing in it, oldScore will be -1, which is always less than "newScore"
 	if (oldScore < newScore) {
 		cout << "You got a new high score! Please enter your name: ";
-		cin.clear();
+		cin.ignore();
 		getline(cin, name);
 
 		outfile.open("highscore.txt", ios::out);
