@@ -113,7 +113,6 @@ int awardPoints(int sum) {
 	int award = pointTable[sum - 6];
 
 	return award;
-
 }
 
 /*
@@ -216,11 +215,11 @@ int lineSelect(int ticket[][3], bool revealed[][3]) {
 
 	//Prompt the user for their choice of line
 	do {
-		cout << "Please select from one of the following lines, (1-8):"
+		cout << "Please select from one of the following lines, (1-8):\n"
 			<< "Line 1: Row 1 \nLine 2: Row 2\nLine 3: Row 3\n"
 			<< "Line 4: A1, B2, C3\n"
 			<< "Line 5: Col A \nLine 6: Col B\nLine 7: Col C\n"
-			<< "Line 8: A3, B2, C3";
+			<< "Line 8: A3, B2, C3\n";
 		cin >> choice;
 		if (choice > 8 || choice < 1) {
 			cout << "Error ... Invalid line." << endl;
@@ -250,7 +249,7 @@ int lineSelect(int ticket[][3], bool revealed[][3]) {
 		revealed[1][1] = true;
 		revealed[2][0] = true;
 	}
-	displayTicket;
+	displayTicket(ticket, revealed);
 	return choice;
 }
 
@@ -279,6 +278,8 @@ int getScore(int lineChoice, int ticket[][3]) {
 		sum += ticket[1][1];
 		sum += ticket[2][0];
 	}
+
+	cout << "Line sum: " << sum << endl;
 	return awardPoints(sum);
 }
 
@@ -366,6 +367,7 @@ void displayTicket(int ticket[][3], bool revealed[][3]) {
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 /*
@@ -376,12 +378,13 @@ void displayTicket(int ticket[][3], bool revealed[][3]) {
 */
 void endGame(int score) {
 	string name;
-	cout << "Final Score: " << score;
+	cout << "Final Score: " << score << endl 
+		<< "-----------------------------------------" << endl << endl;
 	if (manageHighScore(score, name)) {
 		cout << "Congratulations, " << name << "!";
 	}
 
-	cout << "Game Over.";
+	cout << "Game Over." << endl;
 	system("pause");
 }
 
@@ -403,6 +406,7 @@ bool manageHighScore(int newScore, string& name) {
 	//if the file had nothing in it, oldScore will be -1, which is always less than "newScore"
 	if (oldScore < newScore) {
 		cout << "You got a new high score! Please enter your name: ";
+		cin.clear();
 		getline(cin, name);
 
 		outfile.open("highscore.txt", ios::out);
