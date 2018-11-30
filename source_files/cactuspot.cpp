@@ -414,7 +414,7 @@ bool manageHighScore(int newScore, string& name) {
 		getline(cin, name);
 
 		outfile.open("highscore.txt", ios::out);
-		outfile << name << endl << newScore;
+		outfile << name << endl << endl << newScore;
 		return true;
 	}
 	else {
