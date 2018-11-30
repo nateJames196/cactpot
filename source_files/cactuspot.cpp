@@ -104,14 +104,6 @@ int awardPoints(int sum) {
 
 }
 
-int getScore(int lineChoice) {
-	int sum;
-	
-	//TODO: determine the sum, given line choice
-	
-	awardPoints(sum);
-}
-
 /*
 	void printInstructions()
 	
@@ -159,7 +151,120 @@ void playGame(int ticket[][3], bool revealed[][3]) {
 }
 
 void beginGame(int ticket[][3], bool revealed[][3]) {
-	//TODO
+	//Local constants
+	string cells[][] = {
+		{"A1", "B1", "C1"},
+		{"A2", "B2", "C2"},
+		{"A3", "B3", "C3"}
+	};
+	string prompts[] = {"1st", "2nd", "3rd"};
+	
+	//Management variables
+	int donetracker;
+	string cellchoice;
+	
+	//First, display the ticket
+	displayTicket(ticket, revealed);
+	
+	//Ask the player for three cells
+	for (int i = 0;i < 3;i++) {
+		//Make sure not to move on until a new cell has been revealed
+		do {
+			donetracker = -1;
+			cout << "Please enter the col# and row# of the " << prompts[i] << " cell you want to reveal: ";
+			cin >> cellchoice;
+			for (int k = 0;k < 3;k++) {
+				for (int j = 0;j < 3;j++) {
+					//"cells" and "revealed" are parallel
+					if (cellchoice == cells[k][j]) {
+						if (!revealed[k][j]) {//if it isn't revealed, reveal it and end the loop
+							revealed[k][j] = true;
+							donetracker = 1;
+							displayTicket(ticket, revealed);
+						} else {//if it is revealed, 
+							cout << "Error ... That cell is already revealed. Please choose a different one.";
+							donetracker = 0;
+						}
+						break;
+					}
+				}
+			}
+			
+			//Don't display another error if we already showed one.
+			if (donetracker == -1) {
+				cout << "Error ... Invalid cell. Please try again.";
+			}
+		} while (donetracker != 1);
+	}
+}
+
+int lineSelect(int ticket[][3], int revealed[][3]) {
+	int choice;
+	
+	//Prompt the user for their choice of line
+	do {
+		cout << "Please select from one of the following lines, (1-8):"
+		<< "Line 1: Row 1 /nLine 2: Row 2/nLine 3: Row 3"
+		<< "Line 4: A1, B2, C3/n"
+		<< "Line 5: Col A /nLine 6: Col B/nLine 7: Col C"
+		<< "Line 8: A3, B2, C3";
+		cin << choice;
+		if (choice > 8 || choice < 1) {
+			cout << "Error ... Invalid line." << endl;
+		}
+	} while (choice > 8 || choice < 1);
+	
+	//Reveal all the cells in the line
+	switch (choice) {
+		case 1:
+		case 2:
+		case 3:
+			revealed[choice - 1][0] = true;
+			revealed[choice - 1][1] = true;
+			revealed[choice - 1][2] = true;
+		case 4:
+			revealed[0][0] = true;
+			revealed[1][1] = true;
+			revealed[2][2] = true;
+		case 5:
+		case 6:
+		case 7:
+			revealed[0][choice - 5] = true;
+			revealed[1][choice - 5] = true;
+			revealed[2][choice - 5] = true;
+		default:
+			revealed[0][2] = true;
+			revealed[1][1] = true;
+			revealed[2][0] = true;
+	}
+}
+
+int getScore(int lineChoice, int ticket[][3]) {
+	int sum = 0;
+	
+	switch (lineChoice) {
+		case 1:
+		case 2:
+		case 3:
+			sum += ticket[lineChoice - 1][0];
+			sum += ticket[lineChoice - 1][1];
+			sum += ticket[lineChoice - 1][2];
+		case 4:
+			sum += ticket[0][0];
+			sum += ticket[1][1];
+			sum += ticket[2][2];
+		case 5:
+		case 6:
+		case 7:
+			sum += ticket[0][lineChoice - 5];
+			sum += ticket[1][lineChoice - 5];
+			sum += ticket[2][lineChoice - 5];
+		default:
+			sum += ticket[0][2];
+			sum += ticket[1][1];
+			sum += ticket[2][0];
+	}
+	awardPoints(sum);
 }
 
 //Generates a new cactus pot ticket
